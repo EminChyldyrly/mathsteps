@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mathsteps"
+version = "0.1.0"
+description = "Решает задачи по линейной алгебре, дискретной математике и аналитической геометрии с пошаговым выводом"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+dependencies = []
+
+[project.scripts]
+mathsteps = "mathsteps.cli:main"
+
+[tool.setuptools]
+packages = ["mathsteps"]
