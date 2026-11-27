@@ -29,8 +29,10 @@ def parse_relation(elements: str, pairs: str) -> tuple[list[str], set[Pair]]:
     elems = sorted(set(elements.replace(",", " ").split()), key=_key)
     if not elems:
         raise ValueError("пустое множество элементов")
-    found = re.findall(r"\(\s*([^,()\s]+)\s*,\s*([^,()\s]+)\s*\)", pairs)
-    rel = {(a, b) for a, b in found}
+    pattern = re.compile(r"\(\s*([^,()\s]+)\s*,\s*([^,()\s]+)\s*\)")
+    if pattern.sub("", pairs).strip(" ,\t\r\n"):
+        raise ValueError("пары должны быть записаны в формате (a,b)")
+    rel = set(pattern.findall(pairs))
     outside = sorted({x for p in rel for x in p if x not in elems}, key=_key)
     if outside:
         raise ValueError(f"в парах есть элементы вне множества: {', '.join(outside)}")

@@ -212,3 +212,10 @@ class GraphTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class RelationInputTests(unittest.TestCase):
+    def test_rejects_unparsed_relation_input(self):
+        with self.assertRaises(ValueError):
+            discrete.parse_relation("1 2", "(1,2) (2)")
+        self.assertEqual(discrete.parse_relation("1 2", ""), (["1", "2"], set()))
